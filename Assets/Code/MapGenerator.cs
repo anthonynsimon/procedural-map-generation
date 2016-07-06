@@ -8,11 +8,6 @@ public class MapGenerator : MonoBehaviour
     uint width;
     [SerializeField]
     uint height;
-	[SerializeField]
-	float depth;
-
-    [SerializeField]
-    Transform mapRoot;
 
     [Range(0f, 1f)]
     [SerializeField]
@@ -30,48 +25,41 @@ public class MapGenerator : MonoBehaviour
 
     int[,] map;
 
-    Transform thisTransform;
-
-    void Awake()
+    void OnDrawGizmos()
     {
-        thisTransform = this.transform;
-        GenerateMap();
-    }
-
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        if (map != null)
         {
-            GenerateMap();
-        }
-    }
-
-    void ClearMap()
-    {
-        if (mapRoot != null)
-        {
-            for (int i = 0; i < mapRoot.childCount; i++)
+            for (int x = 0; x < map.GetLength(0); x++)
             {
-                GameObject.Destroy(mapRoot.GetChild(i).gameObject);
+                for (int y = 0; y < map.GetLength(1); y++)
+                {
+                    Vector3 position = new Vector3(x - width / 2, y - height / 2, 0);
+                    Vector3 size = Vector3.one;
+                    
+                    Gizmos.color = map[x, y] > 0 ? Color.white : Color.black;
+                    Gizmos.DrawCube(position, size);
+                }
             }
         }
     }
 
-    void GenerateMap()
+    public void GenerateMap()
     {
-        ConfigureRandomSeed();
-        ClearMap();
+        ConfigureSeed();
         BuildMapGrid();
         for (int i = 0; i < smoothSteps; i++)
         {
             SmoothMap();
         }
-        GenerateGameObjects(map);
     }
 
-    void ConfigureRandomSeed()
+    void ConfigureSeed()
     {
-        Random.seed = useRandomSeed ? Random.Range(int.MinValue, int.MaxValue) : seed;
+        if (useRandomSeed)
+        {
+            seed = Random.Range(int.MinValue, int.MaxValue);
+        }
+        Random.seed = seed;
     }
 
     void SmoothMap()
@@ -128,24 +116,6 @@ public class MapGenerator : MonoBehaviour
             for (int y = 0; y < height; y++)
             {
                 map[x, y] = (Random.Range(0, 1f) < fillPercent) ? 1 : 0;
-            }
-        }
-    }
-
-    void GenerateGameObjects(int[,] map)
-    {
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                GameObject go = GameObject.CreatePrimitive(PrimitiveType.Cube);
-				float zScale = (map[x, y] * depth) + 1;
-                go.transform.position = new Vector3((-width / 2) + x + 0.5f, (-height / 2) + y + 0.5f, -zScale / 2);
-                go.transform.localScale = new Vector3(1, 1, zScale);
-                if (mapRoot != null)
-                {
-                    go.transform.SetParent(mapRoot);
-                }
             }
         }
     }
