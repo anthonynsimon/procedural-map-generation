@@ -24,6 +24,7 @@ public class MapGenerator : MonoBehaviour
     bool useRandomSeed = false;
 
     int[,] voxelsMap;
+    Vector2[][] triangles;
 
     void OnDrawGizmos()
     {
@@ -34,7 +35,6 @@ public class MapGenerator : MonoBehaviour
                 for (int y = 0; y < voxelsMap.GetLength(1); y++)
                 {
                     Vector3 position = new Vector3(x, y, 0);
-                    // Vector3 position = new Vector3(x - width / 2, y - height / 2, 0);
                     Vector3 size = Vector3.one;
 
                     Gizmos.color = voxelsMap[x, y] > 0 ? Color.white : Color.black;
@@ -53,12 +53,10 @@ public class MapGenerator : MonoBehaviour
                     Gizmos.DrawLine(triGroup[j + 1], triGroup[j + 2]);
                     Gizmos.DrawLine(triGroup[j + 2], triGroup[j]);
                 }
-
             }
         }
     }
 
-    Vector2[][] triangles;
     public void GenerateMap()
     {
         ConfigureSeed();
