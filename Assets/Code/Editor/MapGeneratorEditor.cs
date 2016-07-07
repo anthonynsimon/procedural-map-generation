@@ -16,5 +16,9 @@ public class MapGeneratorEditor : Editor
             mapGenerator.GenerateMap();
             EditorUtility.SetDirty(mapGenerator);
         }
+        if (GUILayout.Button("Meshify Map"))
+        {
+            mapGenerator.Meshify();
+        }
     }
 }

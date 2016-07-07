@@ -4,14 +4,18 @@ using System.Collections.Generic;
 public class MeshGenerator
 {
 
-    public static Vector2[][] Meshify(int[,] map)
+    public static void Meshify(int[,] map)
     {
         VoxelSquare[,] voxels = Parse(map);
-        return Triangulate(voxels);
+        Vector3[] vertices = GetVertices(voxels);
+        int[] triangles = GetTriangles(vertices);
+        GenerateMeshes(vertices, triangles);
+    }
 
-        // Vector3[] vertices = GetVertices(voxels);
-        // int[] triangles = GetTriangles(voxels);
-        // GenerateMeshes(vertices, triangles);
+    public static Vector2[][] BuildMarchingSquares(int[,] map)
+    {
+        VoxelSquare[,] voxels = Parse(map);
+        return MarchingSquares(voxels);
     }
 
     static VoxelSquare[,] Parse(int[,] map)
@@ -36,53 +40,39 @@ public class MeshGenerator
         return results;
     }
 
-    // static Vector3[] GetVertices(VoxelSquare[,] voxels)
-    // {
-    //     List<Vector3> vertices = new List<Vector3>();
+    static Vector3[] GetVertices(VoxelSquare[,] voxels)
+    {
+        List<Vector3> vertices = new List<Vector3>();
 
-    //     foreach (Vector2[] triGroup in Triangulate(voxels))
-    //     {
-    //         if (triGroup != null)
-    //         {
-    //             vertices.Add(triGroup[0]);
-    //             vertices.Add(triGroup[1]);
-    //             vertices.Add(triGroup[2]);
-    //             if (triGroup.Length > 3)
-    //             {
-    //                 vertices.Add(triGroup[3]);
-    //                 vertices.Add(triGroup[4]);
-    //                 vertices.Add(triGroup[5]);
-    //             }
-    //         }
-    //     }
+        foreach (Vector2[] triGroup in MarchingSquares(voxels))
+        {
+            if (triGroup != null)
+            {
+                for (int j = 0; j + 2 < triGroup.Length; j += 3)
+                {
+                    vertices.Add(triGroup[j]);
+                    vertices.Add(triGroup[j + 1]);
+                    vertices.Add(triGroup[j + 2]);
+                }
+            }
+        }
 
-    //     return vertices.ToArray();
-    // }
-    // static int[] GetTriangles(VoxelSquare[,] voxels)
-    // {
-    //     List<int> triangles = new List<int>();
+        return vertices.ToArray();
+    }
 
-    //     int i = 0;
-    //     foreach (Vector2[] triGroup in Triangulate(voxels))
-    //     {
-    //         if (triGroup != null)
-    //         {
-    //             triangles.Add(i++);
-    //             triangles.Add(i++);
-    //             triangles.Add(i++);
-    //             if (triGroup.Length > 3)
-    //             {
-    //                 triangles.Add(i++);
-    //                 triangles.Add(i++);
-    //                 triangles.Add(i++);
-    //             }
-    //         }
-    //     }
+    static int[] GetTriangles(Vector3[] vertices)
+    {
+        List<int> triangles = new List<int>();
 
-    //     return triangles.ToArray();
-    // }
+        for (int i = 0; i < vertices.Length; i++)
+        {
+            triangles.Add(i);
+        }
 
-    static Vector2[][] Triangulate(VoxelSquare[,] voxels)
+        return triangles.ToArray();
+    }
+
+    static Vector2[][] MarchingSquares(VoxelSquare[,] voxels)
     {
         List<Vector2[]> triangles = new List<Vector2[]>();
         for (int x = 0; x < voxels.GetLength(0); x++)
@@ -412,14 +402,13 @@ public class MeshGenerator
         return triangles.ToArray();
     }
 
-    // static void GenerateMeshes(Vector3[] vertices, int[] triangles)
-    // {
-    //     GameObject go = new GameObject("Cave");
-    //     go.AddComponent<MeshFilter>();
-    //     go.AddComponent<MeshRenderer>();
-    //     Mesh mesh = go.GetComponent<MeshFilter>().mesh;
-    //     mesh.Clear();
-    //     mesh.vertices = vertices;
-    //     mesh.triangles = triangles;
-    // }
+    static void GenerateMeshes(Vector3[] vertices, int[] triangles)
+    {
+        GameObject go = new GameObject("Cave");
+        go.AddComponent<MeshFilter>();
+        go.AddComponent<MeshRenderer>();
+        Mesh mesh = go.GetComponent<MeshFilter>().mesh;
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+    }
 }

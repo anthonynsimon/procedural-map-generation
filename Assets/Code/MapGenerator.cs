@@ -24,7 +24,6 @@ public class MapGenerator : MonoBehaviour
     bool useRandomSeed = false;
 
     int[,] voxelsMap;
-    Vector2[][] triangles;
 
     void OnDrawGizmos()
     {
@@ -41,9 +40,8 @@ public class MapGenerator : MonoBehaviour
                     Gizmos.DrawCube(position, size / 2);
                 }
             }
-        }
-        if (triangles != null)
-        {
+
+            Vector2[][] triangles = MeshGenerator.BuildMarchingSquares(voxelsMap);
             for (int i = 0; i < triangles.Length; i++)
             {
                 Vector2[] triGroup = triangles[i];
@@ -65,7 +63,14 @@ public class MapGenerator : MonoBehaviour
         {
             SmoothMap();
         }
-        triangles = MeshGenerator.Meshify(voxelsMap);
+    }
+
+    public void Meshify()
+    {
+        if (voxelsMap != null)
+        {
+            MeshGenerator.Meshify(voxelsMap);
+        }
     }
 
     void ConfigureSeed()
