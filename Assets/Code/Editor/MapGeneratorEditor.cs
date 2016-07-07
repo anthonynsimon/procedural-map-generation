@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(MapGenerator))]
+[CustomEditor(typeof(LevelBuilder))]
 public class MapGeneratorEditor : Editor
 {
 
@@ -9,16 +9,16 @@ public class MapGeneratorEditor : Editor
     {
         DrawDefaultInspector();
 
-        MapGenerator mapGenerator = (MapGenerator)target;
+        LevelBuilder levelBuilder = (LevelBuilder)target;
         
         if (GUILayout.Button("Generate Map"))
         {
-            mapGenerator.GenerateMap();
-            EditorUtility.SetDirty(mapGenerator);
+            levelBuilder.GenerateMap();
+            EditorUtility.SetDirty(levelBuilder);
         }
         if (GUILayout.Button("Meshify Map"))
         {
-            mapGenerator.Meshify();
+            levelBuilder.Meshify();
         }
     }
 }

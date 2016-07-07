@@ -169,17 +169,17 @@ public class MeshGenerator
                         triSet[1] = new Vector2(x + 0.5f, y + 1);
                         triSet[2] = new Vector2(x, y + 0.5f);
 
-                        triSet[3] = new Vector2(x + 0.5f, y + 0.5f);
-                        triSet[4] = new Vector2(x + 1, y + 0.5f);
-                        triSet[5] = new Vector2(x + 1, y);
+                        triSet[3] = new Vector2(x + 0.5f, y + 1);
+                        triSet[4] = new Vector2(x + 0.5f, y);
+                        triSet[5] = new Vector2(x, y + 0.5f);
 
-                        triSet[6] = new Vector2(x, y + 0.5f);
-                        triSet[7] = new Vector2(x + 0.5f, y + 1);
+                        triSet[6] = new Vector2(x + 0.5f, y + 1);
+                        triSet[7] = new Vector2(x + 1, y + 0.5f);
                         triSet[8] = new Vector2(x + 0.5f, y);
 
-                        triSet[9] = new Vector2(x + 0.5f, y + 1);
+                        triSet[9] = new Vector2(x + 0.5f, y);
                         triSet[10] = new Vector2(x + 1, y + 0.5f);
-                        triSet[11] = new Vector2(x + 0.5f, y);
+                        triSet[11] = new Vector2(x + 1, y);
 
                         triangles.Add(triSet);
                         break;
