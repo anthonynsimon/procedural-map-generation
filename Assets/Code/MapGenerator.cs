@@ -47,27 +47,13 @@ public class MapGenerator : MonoBehaviour
             for (int i = 0; i < triangles.Length; i++)
             {
                 Vector2[] triGroup = triangles[i];
-                Gizmos.DrawLine(triGroup[0], triGroup[1]);
-                Gizmos.DrawLine(triGroup[1], triGroup[2]);
-                Gizmos.DrawLine(triGroup[2], triGroup[0]);
-                if (triGroup.Length > 3)
+                for (int j = 0; j + 2 < triGroup.Length; j += 3)
                 {
-                    Gizmos.DrawLine(triGroup[3], triGroup[4]);
-                    Gizmos.DrawLine(triGroup[4], triGroup[5]);
-                    Gizmos.DrawLine(triGroup[5], triGroup[3]);
+                    Gizmos.DrawLine(triGroup[j], triGroup[j + 1]);
+                    Gizmos.DrawLine(triGroup[j + 1], triGroup[j + 2]);
+                    Gizmos.DrawLine(triGroup[j + 2], triGroup[j]);
                 }
-                if (triGroup.Length > 6)
-                {
-                    Gizmos.DrawLine(triGroup[6], triGroup[7]);
-                    Gizmos.DrawLine(triGroup[7], triGroup[8]);
-                    Gizmos.DrawLine(triGroup[8], triGroup[6]);
-                }
-                if (triGroup.Length > 9)
-                {
-                    Gizmos.DrawLine(triGroup[9], triGroup[10]);
-                    Gizmos.DrawLine(triGroup[10], triGroup[11]);
-                    Gizmos.DrawLine(triGroup[11], triGroup[9]);
-                }
+
             }
         }
     }
