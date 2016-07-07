@@ -117,7 +117,7 @@ public class MapGenerator : MonoBehaviour
                 }
                 if (currentX < 0 || currentX >= width || currentY < 0 || currentY >= height)
                 {
-                    wallCount += 1;
+                    wallCount += 4;
                 }
                 else
                 {
