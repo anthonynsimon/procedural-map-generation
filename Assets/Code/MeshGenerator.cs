@@ -93,8 +93,20 @@ public class MeshGenerator
                 Vector2[] triSet;
                 switch (current.Type())
                 {
+                    /*
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    */
                     case 0:
                         break;
+                    /*
+                    *   [X][X][ ][ ]
+                    *   [X][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    */
                     case 1:
                         triSet = new Vector2[3];
 
@@ -104,6 +116,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][X][X]
+                    *   [ ][ ][ ][X]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    */
                     case 2:
                         triSet = new Vector2[3];
 
@@ -113,6 +131,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    */
                     case 3:
                         triSet = new Vector2[6];
 
@@ -126,6 +150,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][X]
+                    *   [ ][ ][X][X]
+                    */
                     case 4:
                         triSet = new Vector2[3];
 
@@ -136,6 +166,12 @@ public class MeshGenerator
                         triangles.Add(triSet);
 
                         break;
+                    /*
+                    *   [X][X][ ][ ]
+                    *   [X][X][X][ ]
+                    *   [ ][X][X][X]
+                    *   [ ][ ][X][X]
+                    */
                     case 5:
                         triSet = new Vector2[12];
 
@@ -152,11 +188,17 @@ public class MeshGenerator
                         triSet[8] = new Vector2(x + 0.5f, y);
 
                         triSet[9] = new Vector2(x + 0.5f, y + 1);
-                        triSet[10] = new Vector2(x +1, y + 0.5f);
+                        triSet[10] = new Vector2(x + 1, y + 0.5f);
                         triSet[11] = new Vector2(x + 0.5f, y);
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][X][X]
+                    *   [ ][ ][X][X]
+                    *   [ ][ ][X][X]
+                    *   [ ][ ][X][X]
+                    */
                     case 6:
                         triSet = new Vector2[6];
 
@@ -170,6 +212,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    *   [ ][X][X][X]
+                    *   [ ][ ][X][X]
+                    */
                     case 7:
                         triSet = new Vector2[9];
 
@@ -187,6 +235,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [X][ ][ ][ ]
+                    *   [X][X][ ][ ]
+                    */
                     case 8:
                         triSet = new Vector2[3];
 
@@ -196,6 +250,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][ ][ ]
+                    *   [X][X][ ][ ]
+                    *   [X][X][ ][ ]
+                    *   [X][X][ ][ ]
+                    */
                     case 9:
                         triSet = new Vector2[6];
 
@@ -209,6 +269,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][X][X]
+                    *   [ ][X][X][X]
+                    *   [X][X][X][ ]
+                    *   [X][X][ ][ ]
+                    */
                     case 10:
                         triSet = new Vector2[12];
 
@@ -225,11 +291,17 @@ public class MeshGenerator
                         triSet[8] = new Vector2(x + 0.5f, y);
 
                         triSet[9] = new Vector2(x + 0.5f, y + 1);
-                        triSet[10] = new Vector2(x +1, y + 0.5f);
+                        triSet[10] = new Vector2(x + 1, y + 0.5f);
                         triSet[11] = new Vector2(x + 0.5f, y);
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    *   [X][X][X][ ]
+                    *   [X][X][ ][ ]
+                    */
                     case 11:
                         triSet = new Vector2[9];
 
@@ -238,15 +310,21 @@ public class MeshGenerator
                         triSet[2] = new Vector2(x, y);
 
                         triSet[3] = new Vector2(x + 1, y + 1);
-                        triSet[4] = new Vector2(x + 0.5f, y );
+                        triSet[4] = new Vector2(x + 0.5f, y);
                         triSet[5] = new Vector2(x, y);
 
                         triSet[6] = new Vector2(x + 0.5f, y);
                         triSet[7] = new Vector2(x + 1, y + 1);
-                        triSet[8] = new Vector2(x + 1, y +  0.5f);
+                        triSet[8] = new Vector2(x + 1, y + 0.5f);
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][ ][ ]
+                    *   [ ][ ][ ][ ]
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    */
                     case 12:
                         triSet = new Vector2[6];
 
@@ -260,6 +338,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][ ][ ]
+                    *   [X][X][X][ ]
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    */
                     case 13:
                         triSet = new Vector2[9];
 
@@ -277,6 +361,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [ ][ ][X][X]
+                    *   [ ][X][X][X]
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    */
                     case 14:
                         triSet = new Vector2[9];
 
@@ -294,6 +384,12 @@ public class MeshGenerator
 
                         triangles.Add(triSet);
                         break;
+                    /*
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    *   [X][X][X][X]
+                    */
                     case 15:
                         triSet = new Vector2[6];
 
